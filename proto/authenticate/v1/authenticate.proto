@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package authenticate.v1;
+
+import "validate/validate.proto";
+import "google/api/annotations.proto";
+
+
+message AuthenticateRequest {
+    string username = 1 [(validate.rules).string.email = true];
+    string password = 2;
+}
+
+message AuthenticateResponse {
+    string token = 1;
+}
+
+service AuthenticatorService {
+    rpc Authenticate(AuthenticateRequest) returns (AuthenticateResponse);
+}
